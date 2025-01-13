@@ -14,10 +14,10 @@
 						<div class="span8">
 						
 								<div class="title">
-							<p class="chmsc">Carlos Hilado Memorial State College - Talisay</p>
+							<p class="chmsc">Sanothimi Campus</p>
 							<h3>
 
-							<p>M - Learning</p>
+							<p>MICT Learning</p>
 						
 							</h3>		
 						</div>
@@ -30,9 +30,9 @@
 						<div class="span12">
 						<br>
 								<div class="motto">
-												<p>CHMSC EXCELS:</p>
+												<p>Department of ICT</p>
 												<p>Excellence, Competence and Educational</p>
-												<p>Leadership in Science and Technology</p>
+												<p>Leadership in Technology</p>
 								</div>		
 						</div>		
 				</div>

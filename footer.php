@@ -1,8 +1,8 @@
 <center>
 		<footer>
 		
-		<p>CHMSC M-Learning Copyright 2013</p>
-			<!-- <p>Programmed by: John Kevin Lorayna BSIS 4-A</p> -->
+		<p>Xemon Tech Group Copyright 2025</p>
+			<!-- <p>Programmed by: Xemon Tech Group</p> -->
 		</footer>
 </center>
 

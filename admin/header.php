@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js">
     <head>
-        <title>Learning Management System</title>
+        <title>Xemon Learning Management System</title>
         <!-- Bootstrap -->
 			<!-- <link href="images/logo.png" rel="icon" type="image"> -->
 			<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">

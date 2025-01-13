@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="no-js">
     <head>
-        <title>CHMSC LMS</title>
+        <title>Xemon LMS</title>
 		<meta name="description" content="Learning Management System">
-		<meta name="keywords" content="CHMSC LMS,CHMSCLMS,CHMSC,LMS,CHMSCLMS.COMXA">
-		<meta name="author" content="JOHN KEVIN LORAYNA">
+		<meta name="keywords" content="Xemon LMS,XemonLMS,Xemon,LMS,XemonLMS.COMXA">
+		<meta name="author" content="Dadip Bhattarai">
 		<meta charset="UTF-8">
         <!-- Bootstrap -->
 		<link href="admin/images/favicon.ico" rel="icon" type="image">
