@@ -1,3 +1,31 @@
+<?php
+include('dbcon.php'); // Include your database connection here
+
+if (isset($_POST['save'])) {
+	// Get form data
+	$class_id = $_POST['class_id'];
+	$id_number = $_POST['un'];
+	$first_name = $_POST['fn'];
+	$last_name = $_POST['ln'];
+
+	// Check if the ID number already exists
+	$query = mysqli_query($conn, "SELECT * FROM students WHERE id_number = '$id_number'");
+	if (mysqli_num_rows($query) > 0) {
+		// Return ID_EXISTS response for the front-end to handle
+		echo 'ID_EXISTS';
+	} else {
+		// Insert student record into the database
+		$insert_query = mysqli_query($conn, "INSERT INTO students (class_id, id_number, first_name, last_name) 
+                                              VALUES ('$class_id', '$id_number', '$first_name', '$last_name')");
+		if ($insert_query) {
+			echo 'Success';
+		} else {
+			echo 'Error';
+		}
+	}
+}
+?>
+
 <div class="row-fluid">
 	<!-- block -->
 	<div class="block">
@@ -65,35 +93,36 @@
 <script>
 	jQuery(document).ready(function ($) {
 		$("#add_student").submit(function (e) {
-			e.preventDefault(); // Prevent the form from submitting traditionally
-
-			var _this = $(e.target); // Get the form that was submitted
-			var formData = $(this).serialize(); // Serialize form data for submission
-
+			e.preventDefault();
+			var _this = $(e.target);
+			var formData = $(this).serialize();
 			$.ajax({
 				type: "POST",
-				url: "save_student.php", // Target script for saving student
+				url: "save_student.php",
 				data: formData,
+				dataType: "json",
 				success: function (response) {
-					// Display success notification
-					$.jGrowl("Student Successfully Added", { header: 'Student Added' });
-
-					// Reload the student table dynamically
-					$('#studentTableDiv').load('student_table.php', function (htmlResponse) {
-						$("#studentTableDiv").html(htmlResponse);
-						$('#example').dataTable({
-							"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-							"sPaginationType": "bootstrap",
-							"oLanguage": {
-								"sLengthMenu": "_MENU_ records per page"
-							}
+					if (response.status === "error") {
+						$.jGrowl(response.message, { header: 'Error' });
+					} else if (response.status === "success") {
+						$.jGrowl(response.message, { header: 'Student Added' });
+						$('#studentTableDiv').load('student_table.php', function (response) {
+							$("#studentTableDiv").html(response);
+							$('#example').dataTable({
+								"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+								"sPaginationType": "bootstrap",
+								"oLanguage": {
+									"sLengthMenu": "MENU records per page"
+								}
+							});
+							$(_this).find(":input").val('');
+							$(_this).find('select option').attr('selected', false);
+							$(_this).find('select option:first').attr('selected', true);
 						});
-
-						// Clear form inputs after successful submission
-						_this.find(":input").val('');
-						_this.find('select option').attr('selected', false);
-						_this.find('select option:first').attr('selected', true); // Set first option as selected
-					});
+					}
+				},
+				error: function () {
+					$.jGrowl("An error occurred while processing your request.", { header: 'Error' });
 				}
 			});
 		});
