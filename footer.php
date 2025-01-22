@@ -1,8 +1,5 @@
 <center>
-		<footer>
-		
+	<footer>
 		<p>Xemon Tech Group Copyright 2025</p>
-			<!-- <p>Programmed by: Xemon Tech Group</p> -->
-		</footer>
+	</footer>
 </center>
-

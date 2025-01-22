@@ -1,60 +1,63 @@
-			<form id="signin_teacher" class="form-signin" method="post">
-					<h3 class="form-signin-heading"><i class="icon-lock"></i> Sign up as Teacher</h3>
-					<input type="text" class="input-block-level"  name="firstname" placeholder="Firstname" required>
-					<input type="text" class="input-block-level"  name="lastname" placeholder="Lastname" required>
-					<label>Department</label>
-					<select name="department_id" class="input-block-level span12">
-						<option></option>
-						<?php
-						$query = mysqli_query($conn,"select * from department order by department_name ")or die(mysqli_error());
-						while($row = mysqli_fetch_array($query)){
-						?>
-						<option value="<?php echo $row['department_id'] ?>"><?php echo $row['department_name']; ?></option>
-						<?php
+<form id="signup_teacher" class="form-signin" method="post">
+	<h3 class="form-signin-heading">
+		<i class="icon-lock"></i> Sign up as Teacher
+	</h3>
+	<input type="text" class="input-block-level" name="firstname" placeholder="Firstname" required>
+	<input type="text" class="input-block-level" name="lastname" placeholder="Lastname" required>
+
+	<label for="department_id">Department</label>
+	<select name="department_id" id="department_id" class="input-block-level span12" required>
+		<option value="" disabled selected>Select Department</option>
+		<?php
+		$query = mysqli_query($conn, "SELECT * FROM department ORDER BY department_name") or die(mysqli_error($conn));
+		while ($row = mysqli_fetch_assoc($query)) {
+			echo '<option value="' . $row['department_id'] . '">' . htmlspecialchars($row['department_name'], ENT_QUOTES, 'UTF-8') . '</option>';
+		}
+		?>
+	</select>
+
+	<input type="text" class="input-block-level" name="username" placeholder="Username" required>
+	<input type="password" class="input-block-level" name="password" id="password" placeholder="Password" required>
+	<input type="password" class="input-block-level" name="cpassword" id="cpassword" placeholder="Re-type Password"
+		required>
+
+	<button id="signup" class="btn btn-info" type="submit">
+		<i class="icon-check icon-large"></i> Sign Up
+	</button>
+</form>
+
+<script>
+	$(document).ready(function () {
+		$('#signup_teacher').on('submit', function (e) {
+			e.preventDefault();
+
+			const password = $('#password').val();
+			const cpassword = $('#cpassword').val();
+
+			if (password === cpassword) {
+				$.ajax({
+					type: 'POST',
+					url: 'teacher_signup.php',
+					data: $(this).serialize(),
+					success: function (response) {
+						if (response.trim() === 'true') {
+							$.jGrowl('Welcome to Xemon Learning Management System', { header: 'Sign Up Success' });
+							setTimeout(() => { window.location = 'dasboard_teacher.php' }, 1000);
+						} else {
+							$.jGrowl('Sign up failed. Please try again.', { header: 'Sign Up Failed' });
 						}
-						?>
-					</select>
-					<input type="text" class="input-block-level" id="username" name="username" placeholder="Username" required>
-					<input type="password" class="input-block-level" id="password" name="password" placeholder="Password" required>
-					<input type="password" class="input-block-level" id="cpassword" name="cpassword" placeholder="Re-type Password" required>
-					<button id="signin" name="login" class="btn btn-info" type="submit"><i class="icon-check icon-large"></i> Sign in</button>
-			</form>
-			<script>
-			jQuery(document).ready(function(){
-			jQuery("#signin_teacher").submit(function(e){
-					e.preventDefault();
-						var password = jQuery('#password').val();
-						var cpassword = jQuery('#cpassword').val();
-					if (password == cpassword){
-					var formData = jQuery(this).serialize();
-					$.ajax({
-						type: "POST",
-						url: "teacher_signup.php",
-						data: formData,
-						success: function(html){
-						if(html=='true')
-						{
-						$.jGrowl("Welcome to Xemon Learning Management System", { header: 'Sign up Success' });
-						var delay = 1000;
-							setTimeout(function(){ window.location = 'dasboard_teacher.php'  }, delay);  
-						}else{
-							$.jGrowl("Your data is not found in the database", { header: 'Sign Up Failed' });
-						}
-						}
-					});
-			
-					}else
-						{
-						$.jGrowl("Your data is not found in the database", { header: 'Sign Up Failed' });
-						}
+					},
+					error: function () {
+						$.jGrowl('An error occurred. Please try again.', { header: 'Error' });
+					}
 				});
-			});
-			</script>
-			<a onclick="window.location='index.php'" id="btn_login" name="login" class="btn" type="submit"><i class="icon-signin icon-large"></i> Click here to Login</a>
-			
-			
-			
-				
-		
-					
-		
+			} else {
+				$.jGrowl('Passwords do not match. Please try again.', { header: 'Sign Up Failed' });
+			}
+		});
+	});
+</script>
+
+<a href="index.php" class="btn">
+	<i class="icon-signin icon-large"></i> Click here to Login
+</a>
