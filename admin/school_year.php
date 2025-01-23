@@ -5,7 +5,7 @@
 	<?php include('navbar.php'); ?>
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<?php include('school_year_sidebar.php'); ?>
+			<?php include('sidebar.php'); ?>
 			<div class="span3" id="adduser">
 				<?php include('add_school_year.php'); ?>
 			</div>

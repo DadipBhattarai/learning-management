@@ -5,7 +5,7 @@
 	<?php include('navbar.php') ?>
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<?php include('sidebar_calendar.php'); ?>
+			<?php include('sidebar.php'); ?>
 
 			<!--/span-->
 			<div class="span9" id="content">

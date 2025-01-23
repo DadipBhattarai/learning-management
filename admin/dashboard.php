@@ -124,7 +124,7 @@
     <?php include('navbar.php'); ?>
     <div class="container-fluid">
         <div class="row-fluid">
-            <?php include('sidebar_dashboard.php'); ?>
+            <?php include('sidebar.php'); ?>
             <div class="span9" id="content">
 
                 <!-- Cards for Quick Metrics -->

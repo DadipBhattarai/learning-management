@@ -6,7 +6,7 @@
 	<?php include('navbar_teacher.php'); ?>
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<?php include('class_sidebar.php'); ?>
+			<?php include('sidebar.php'); ?>
 			<div class="span9" id="content">
 				<div class="row-fluid">
 					<!-- breadcrumb -->
