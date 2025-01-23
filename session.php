@@ -7,5 +7,5 @@ if (!isset($_SESSION['id']) || ($_SESSION['id'] == '')) {
     exit();
 }
 
-$session_id=$_SESSION['id'];
+$session_id = $_SESSION['id'];
 ?>

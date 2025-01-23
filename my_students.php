@@ -6,7 +6,7 @@
 	<?php include('navbar_teacher.php'); ?>
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<?php include('sidebar.php'); ?>
+			<?php include('teacher_sidebar.php'); ?>
 			<div class="span9" id="content">
 				<div class="row-fluid">
 					<div class="pull-right">
@@ -52,8 +52,8 @@
 													</span>
 												</div>
 											</a>
-											<p class="class"><?php echo $row['lastname']; ?></p>
-											<p class="subject"><?php echo $row['firstname']; ?></p>
+											<p class="class"><?php echo $row['firstname']; ?></p>
+											<p class="subject"><?php echo $row['lastname']; ?></p>
 											<a href="#<?php echo $id; ?>" data-toggle="modal"><i class="icon-trash"></i>
 												Remove</a>
 										</li>

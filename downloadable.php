@@ -3,7 +3,7 @@
 <?php $get_id = $_GET['id']; ?>
 
 <body>
-	<?php include('navbar_teacher.php'); ?>
+	<?php include('navbar_student.php'); ?>
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<?php include('downloadable_link.php'); ?>
@@ -156,7 +156,7 @@
 				</script>
 
 			</div>
-			<?php include('sidebar.php') ?>
+			<?php include('downloadable_sidebar.php') ?>
 		</div>
 		<?php include('footer.php'); ?>
 	</div>
