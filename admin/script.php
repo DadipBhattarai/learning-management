@@ -54,6 +54,14 @@
     });
 </script>
 
+
+<!-- Bootstrap CSS -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<!-- Bootstrap Icons -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> -->
+
+
 <link href="vendors/datepicker.css" rel="stylesheet" media="screen">
 <link href="vendors/uniform.default.css" rel="stylesheet" media="screen">
 <link href="vendors/chosen.min.css" rel="stylesheet" media="screen">
@@ -61,7 +69,6 @@
 <script src="vendors/jquery.uniform.min.js"></script>
 <script src="vendors/chosen.jquery.min.js"></script>
 <script src="vendors/bootstrap-datepicker.js"></script>
-
 
 
 

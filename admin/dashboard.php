@@ -1,6 +1,125 @@
 <?php include('header.php'); ?>
 <?php include('session.php'); ?>
 
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .row_lms {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .card_lms {
+            flex: 1 1 calc(20% - 20px);
+            /* 23% width with space for gaps */
+            max-width: 20%;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 15px;
+            background-color: #fff;
+        }
+
+        .card_lms h5 {
+            margin: 10px 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .card_lms p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .rounded-circle_lms {
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            font-size: 28px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Individual Colors for Icons */
+        .bg-primary_lms {
+            background-color: #007bff;
+        }
+
+        .bg-info_lms {
+            background-color: #17a2b8;
+        }
+
+        .bg-success_lms {
+            background-color: #28a745;
+        }
+
+        .bg-warning_lms {
+            background-color: #ffc107;
+        }
+
+        .bg-secondary_lms {
+            background-color: #6c757d;
+        }
+
+        .bg-danger_lms {
+            background-color: #dc3545;
+        }
+
+        .bg-teal_lms {
+            background-color: #20c997;
+        }
+
+        /* Custom Icons */
+        .icon_lms {
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .icon-chalkboard-teacher_lms:before {
+            content: "📚";
+        }
+
+        .icon-user-tie_lms:before {
+            content: "👔";
+        }
+
+        .icon-user-graduate_lms:before {
+            content: "🎓";
+        }
+
+        .icon-users_lms:before {
+            content: "👥";
+        }
+
+        .icon-school_lms:before {
+            content: "🏫";
+        }
+
+        .icon-file-download_lms:before {
+            content: "📥";
+        }
+
+        .icon-book_lms:before {
+            content: "📘";
+        }
+    </style>
+
+    </style>
+</head>
+
 <body>
     <?php include('navbar.php'); ?>
     <div class="container-fluid">
@@ -34,6 +153,72 @@
                     ?>
 
 
+                    <div class="row_lms">
+                        <!-- Registered Teachers -->
+                        <div class="card_lms">
+                            <div class="rounded-circle_lms bg-primary_lms">
+                                <span class="icon_lms icon-chalkboard-teacher_lms"></span>
+                            </div>
+                            <h5><?php echo $count_reg_teacher; ?></h5>
+                            <p>Registered Teachers</p>
+                        </div>
+
+                        <!-- Total Teachers -->
+                        <div class="card_lms">
+                            <div class="rounded-circle_lms bg-info_lms">
+                                <span class="icon_lms icon-user-tie_lms"></span>
+                            </div>
+                            <h5><?php echo $count_teacher; ?></h5>
+                            <p>Total Teachers</p>
+                        </div>
+
+                        <!-- Registered Students -->
+                        <div class="card_lms">
+                            <div class="rounded-circle_lms bg-success_lms">
+                                <span class="icon_lms icon-user-graduate_lms"></span>
+                            </div>
+                            <h5><?php echo $count_student_registered; ?></h5>
+                            <p>Registered Students</p>
+                        </div>
+
+                        <!-- Total Students -->
+                        <div class="card_lms">
+                            <div class="rounded-circle_lms bg-warning_lms">
+                                <span class="icon_lms icon-users_lms"></span>
+                            </div>
+                            <h5><?php echo $count_student; ?></h5>
+                            <p>Total Students</p>
+                        </div>
+
+                        <!-- Classes -->
+                        <div class="card_lms">
+                            <div class="rounded-circle_lms bg-secondary_lms">
+                                <span class="icon_lms icon-school_lms"></span>
+                            </div>
+                            <h5><?php echo $count_class; ?></h5>
+                            <p>Classes</p>
+                        </div>
+
+                        <!-- Downloadable Files -->
+                        <div class="card_lms">
+                            <div class="rounded-circle_lms bg-danger_lms">
+                                <span class="icon_lms icon-file-download_lms"></span>
+                            </div>
+                            <h5><?php echo $count_file; ?></h5>
+                            <p>Downloadable Files</p>
+                        </div>
+
+                        <!-- Subjects -->
+                        <div class="card_lms">
+                            <div class="rounded-circle_lms bg-teal_lms">
+                                <span class="icon_lms icon-book_lms"></span>
+                            </div>
+                            <h5><?php echo $count_subject; ?></h5>
+                            <p>Subjects</p>
+                        </div>
+                    </div>
+
+
                     <!-- Combined Chart Section -->
                     <div class="row mt-5">
                         <div class="col-md-12" style="width: 90%; max-width: 1000px; margin: 0 auto;">
@@ -46,7 +231,7 @@
                                     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
                                     padding: 10px; 
                                     background: #fff;">
-                                        <canvas id="combinedChart" style="width: 100%; height: 500px;"></canvas>
+                                        <canvas id="combinedChart" style="width: 100%; height: 400px;"></canvas>
                                     </div>
                                 </div>
                             </div>
