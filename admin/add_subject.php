@@ -36,16 +36,27 @@
 										<input type="text" class="span1" name="unit" id="unit" required>
 									</div>
 								</div>
+
 								<div class="control-group">
 									<label class="control-label" for="semester">Semester</label>
 									<div class="controls">
 										<select name="semester" id="semester">
 											<option value="" disabled selected>Select Semester</option>
-											<option>1st</option>
-											<option>2nd</option>
+											<?php
+											$semesterQuery = mysqli_query($conn, "SELECT DISTINCT class_name FROM class") or die(mysqli_error($conn));
+
+											if (mysqli_num_rows($semesterQuery) > 0) {
+												while ($row = mysqli_fetch_assoc($semesterQuery)) {
+													echo "<option value='" . htmlspecialchars($row['semester']) . "'>" . htmlspecialchars($row['class_name']) . "</option>";
+												}
+											} else {
+												echo "<option value='' disabled>No semesters available</option>";
+											}
+											?>
 										</select>
 									</div>
 								</div>
+
 								<div class="control-group">
 									<label class="control-label" for="description">Description</label>
 									<div class="controls">

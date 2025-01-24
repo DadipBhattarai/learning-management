@@ -21,8 +21,14 @@
 							<a href="subjects.php"><i class="icon-arrow-left"></i> Back</a>
 
 							<?php
-							$query = mysqli_query($conn, "select * from subject where subject_id = '$get_id'") or die(mysqli_error());
+							$query = mysqli_query($conn, "SELECT * FROM subject WHERE subject_id = '$get_id'") or die(mysqli_error());
 							$row = mysqli_fetch_array($query);
+
+							// Check if $row is empty and handle it
+							if (!$row) {
+								echo "<script>alert('No subject found with the given ID.'); window.location = 'subjects.php';</script>";
+								exit();
+							}
 							?>
 
 							<form class="form-horizontal" method="post">
@@ -47,20 +53,39 @@
 											id="inputPassword" required>
 									</div>
 								</div>
+
+
 								<div class="control-group">
-									<label class="control-label" for="inputPassword">Description</label>
+									<label class="control-label" for="semester">Semester</label>
 									<div class="controls">
-										<textarea name="description" id="ckeditor_full">
-													<?php echo $row['description']; ?>
-													</textarea>
+										<select name="semester" id="semester">
+											<option value="" disabled>Select Semester</option>
+											<?php
+											$semesterQuery = mysqli_query($conn, "SELECT DISTINCT class_name FROM class") or die(mysqli_error($conn));
+
+											if (mysqli_num_rows($semesterQuery) > 0) {
+												while ($row2 = mysqli_fetch_assoc($semesterQuery)) {
+													// Check if the semester is selected
+													$selected = ($row2['class_name'] == $row['semester']) ? 'selected' : '';
+													echo "<option value='" . htmlspecialchars($row2['class_name']) . "' $selected>" . htmlspecialchars($row2['class_name']) . "</option>";
+												}
+											} else {
+												echo "<option value='' disabled>No semesters available</option>";
+											}
+											?>
+										</select>
 									</div>
 								</div>
 
-
-
+								<div class="control-group">
+									<label class="control-label" for="inputPassword">Description</label>
+									<div class="controls">
+										<textarea name="description"
+											id="ckeditor_full"><?php echo htmlspecialchars(trim($row['description'])); ?></textarea>
+									</div>
+								</div>
 								<div class="control-group">
 									<div class="controls">
-
 										<button name="update" type="submit" class="btn btn-info"><i
 												class="icon-save icon-large"></i> Update</button>
 									</div>
@@ -73,28 +98,19 @@
 								$title = $_POST['title'];
 								$unit = $_POST['unit'];
 								$description = $_POST['description'];
+								$semester = $_POST['semester'];
 
+								mysqli_query($conn, "UPDATE subject SET subject_code = '$subject_code', subject_title = '$title', unit = '$unit', description = '$description', semester = '$semester' WHERE subject_id = '$get_id'") or die(mysqli_error());
 
-
-								mysqli_query($conn, "update subject set subject_code = '$subject_code' ,
-																		subject_title = '$title',
-																		unit  = '$unit',
-																		description = '$description'
-																		where subject_id = '$get_id' ") or die(mysqli_error());
-
-								mysqli_query($conn, "insert into activity_log (date,username,action) values(NOW(),'$user_username','Edit Subject $subject_code')") or die(mysqli_error());
-
+								mysqli_query($conn, "INSERT INTO activity_log (date,username,action) VALUES(NOW(),'$user_username','Edit Subject $subject_code')") or die(mysqli_error());
 								?>
+
 								<script>
 									window.location = "subjects.php";
 								</script>
 								<?php
 							}
-
-
 							?>
-
-
 						</div>
 					</div>
 					<!-- /block -->
