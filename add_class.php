@@ -13,7 +13,8 @@
 					<div class="controls">
 						<input type="hidden" name="session_id" value="<?php echo $session_id; ?>">
 						<select name="class_id" class="" required>
-							<option></option>
+							<option value="" disabled selected>Select Class</option>
+
 							<?php
 							$query = mysqli_query($conn, "select * from class order by class_name");
 							while ($row = mysqli_fetch_array($query)) {
@@ -29,7 +30,7 @@
 					<label>Subject:</label>
 					<div class="controls">
 						<select name="subject_id" class="" required>
-							<option></option>
+							<option value="" disabled selected>Select Subject</option>
 							<?php
 							$query = mysqli_query($conn, "select * from subject order by subject_code");
 							while ($row = mysqli_fetch_array($query)) {

@@ -28,6 +28,7 @@
 												<th></th>
 												<th>Subject Code</th>
 												<th>Subject Title</th>
+												<th>Semester</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -46,6 +47,7 @@
 													</td>
 													<td><?php echo $row['subject_code']; ?></td>
 													<td><?php echo $row['subject_title']; ?></td>
+													<td><?php echo $row['semester']; ?> </td>
 
 													<td width="30"><a href="edit_subject.php<?php echo '?id=' . $id; ?>"
 															class="btn btn-success"><i class="icon-pencil"></i> </a></td>
