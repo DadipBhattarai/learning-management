@@ -20,7 +20,7 @@
 									<label class="control-label" for="subject_code">Subject Code</label>
 									<div class="controls">
 										<input type="text" name="subject_code" id="subject_code"
-											placeholder="Subject Code">
+											placeholder="Subject Code" required>
 									</div>
 								</div>
 								<div class="control-group">
@@ -33,21 +33,19 @@
 								<div class="control-group">
 									<label class="control-label" for="unit">Number of Units</label>
 									<div class="controls">
-										<input type="text" class="span1" name="unit" id="unit" required>
+										<input type="number" class="span1" name="unit" id="unit" min="0" required>
 									</div>
 								</div>
-
 								<div class="control-group">
 									<label class="control-label" for="semester">Semester</label>
 									<div class="controls">
-										<select name="semester" id="semester">
+										<select name="semester" id="semester" required>
 											<option value="" disabled selected>Select Semester</option>
 											<?php
 											$semesterQuery = mysqli_query($conn, "SELECT DISTINCT class_name FROM class") or die(mysqli_error($conn));
-
 											if (mysqli_num_rows($semesterQuery) > 0) {
 												while ($row = mysqli_fetch_assoc($semesterQuery)) {
-													echo "<option value='" . htmlspecialchars($row['semester']) . "'>" . htmlspecialchars($row['class_name']) . "</option>";
+													echo "<option value='" . htmlspecialchars($row['class_name']) . "'>" . htmlspecialchars($row['class_name']) . "</option>";
 												}
 											} else {
 												echo "<option value='' disabled>No semesters available</option>";
@@ -56,11 +54,11 @@
 										</select>
 									</div>
 								</div>
-
 								<div class="control-group">
 									<label class="control-label" for="description">Description</label>
 									<div class="controls">
-										<textarea name="description" id="ckeditor_full"></textarea>
+										<textarea name="description" id="ckeditor_full"
+											placeholder="Enter description here..." required></textarea>
 									</div>
 								</div>
 								<div class="control-group">
@@ -77,21 +75,34 @@
 							$messageType = '';
 
 							if (isset($_POST['save'])) {
-								$subject_code = $_POST['subject_code'];
-								$title = $_POST['title'];
-								$unit = $_POST['unit'];
-								$description = $_POST['description'];
-								$semester = $_POST['semester'];
+								// Sanitize user input
+								$subject_code = mysqli_real_escape_string($conn, $_POST['subject_code']);
+								$title = mysqli_real_escape_string($conn, $_POST['title']);
+								$unit = (int) $_POST['unit'];
+								$description = mysqli_real_escape_string($conn, $_POST['description']);
+								$semester = mysqli_real_escape_string($conn, $_POST['semester']);
 
-								$query = mysqli_query($conn, "SELECT * FROM subject WHERE subject_code = '$subject_code'") or die(mysqli_error());
-								$count = mysqli_num_rows($query);
+								// Check if subject already exists
+								$query = mysqli_prepare($conn, "SELECT * FROM subject WHERE subject_code = ?");
+								mysqli_stmt_bind_param($query, "s", $subject_code);
+								mysqli_stmt_execute($query);
+								$result = mysqli_stmt_get_result($query);
+								$count = mysqli_num_rows($result);
 
 								if ($count > 0) {
 									$message = 'Subject already exists!';
 									$messageType = 'warning';
 								} else {
-									mysqli_query($conn, "INSERT INTO subject (subject_code,subject_title,description,unit,semester) VALUES('$subject_code','$title','$description','$unit','$semester')") or die(mysqli_error());
-									mysqli_query($conn, "INSERT INTO activity_log (date,username,action) VALUES(NOW(),'$user_username','Add Subject $subject_code')") or die(mysqli_error());
+									// Insert new subject
+									$insertQuery = mysqli_prepare($conn, "INSERT INTO subject (subject_code, subject_title, description, unit, semester) VALUES (?, ?, ?, ?, ?)");
+									mysqli_stmt_bind_param($insertQuery, "sssds", $subject_code, $title, $description, $unit, $semester);
+									mysqli_stmt_execute($insertQuery);
+
+									// Log activity
+									$logQuery = mysqli_prepare($conn, "INSERT INTO activity_log (date, username, action) VALUES (NOW(), ?, ?)");
+									$action = "Add Subject $subject_code";
+									mysqli_stmt_bind_param($logQuery, "ss", $user_username, $action);
+									mysqli_stmt_execute($logQuery);
 
 									$message = 'Subject added successfully!';
 									$messageType = 'success';
