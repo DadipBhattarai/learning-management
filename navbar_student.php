@@ -1,3 +1,23 @@
+<style>
+	.chatbot-icon {
+		display: flex;
+		align-items: center;
+		height: 40px;
+		padding: 0 10px;
+
+	}
+
+	.chatbot-icon i {
+		color: #fff;
+		font-size: 20px;
+		cursor: pointer;
+		transition: color 0.3s ease-in-out;
+	}
+
+	.chatbot-icon i:hover {
+		color: #0F62FE;
+	}
+</style>
 <div class="navbar navbar-fixed-top navbar-inverse">
 	<div class="navbar-inner">
 		<div class="container-fluid">
@@ -10,6 +30,10 @@
 					<?php $query = mysqli_query($conn, "select * from student where student_id = '$session_id'") or die(mysqli_error());
 					$row = mysqli_fetch_array($query);
 					?>
+					<li class="chatbot-icon">
+						<i class="icon-comments icon-large"></i>
+					</li>
+
 					<li class="dropdown">
 						<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
 								class="icon-user icon-large"></i><?php echo $row['firstname'] . " " . $row['lastname']; ?>

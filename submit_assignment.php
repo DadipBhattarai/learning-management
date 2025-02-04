@@ -108,7 +108,7 @@ if ($post_id == '') {
 
 
 			</div>
-			<?php include('submit_sidebar.php') ?>
+			<?php include('submit_assignment_sidebar.php') ?>
 
 		</div>
 		<?php include('footer.php'); ?>
