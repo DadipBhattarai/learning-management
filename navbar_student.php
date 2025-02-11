@@ -11,7 +11,6 @@
 					$row = mysqli_fetch_array($query);
 					?>
 
-
 					<li class="dropdown">
 						<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
 								class="icon-user icon-large"></i><?php echo $row['firstname'] . " " . $row['lastname']; ?>
