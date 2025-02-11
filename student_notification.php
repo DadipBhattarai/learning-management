@@ -79,7 +79,8 @@
 												<?php echo $row['notification']; ?> In
 												<a href="<?php echo $row['link']; ?><?php echo '?id=' . $get_id; ?>">
 													<?php echo $row['class_name']; ?>
-													<?php echo $row['subject_code']; ?>
+													<?php echo $row['subject_code'], ' --'; ?>
+													<?php echo $row['subject_title']; ?>
 												</a>
 												<hr>
 												<div class="pull-right">

@@ -54,7 +54,7 @@
 
 												<th>Photo</th>
 												<th>Name</th>
-												<th>Course Year and Section</th>
+												<th>Class</th>
 
 												<th></th>
 											</tr>
@@ -114,9 +114,6 @@
 									$test = $_POST['test'];
 									for ($b = 1; $b <= $test; $b++) {
 
-
-
-
 										$test1 = "student_id" . $b;
 										$test2 = "class_id" . $b;
 										$test3 = "teacher_id" . $b;
@@ -148,11 +145,7 @@
 
 											} else {
 
-
-
 											}
-
-
 
 										?>
 										<script>

@@ -44,6 +44,15 @@
 											<input type="text" name="name" Placeholder="File Name" class="input">
 										</div>
 									</div>
+
+									<div class="control-group">
+										<div class="controls">
+											<input name="end_date" id="datepicker" class="form-control"
+												placeholder="Select Submit Date" required>
+										</div>
+									</div>
+
+
 									<div class="control-group">
 										<div class="controls">
 											<textarea id="assigntextare" placeholder="Description" name="desc"
@@ -151,12 +160,20 @@
 
 
 			</div>
-			<? php/*  include('teacher_right_sidebar.php')  */ ?>
+
 
 		</div>
 		<?php include('footer.php'); ?>
 	</div>
 	<?php include('script.php'); ?>
 </body>
+<script>
+	$(document).ready(function () {
+		$('#datepicker').datepicker({
+			format: 'yyyy-mm-dd', // Set format to yyyy-mm-dd
+			autoclose: true  // Automatically closes when a date is selected
+		});
+	});
+</script>
 
 </html>

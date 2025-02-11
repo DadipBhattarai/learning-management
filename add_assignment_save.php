@@ -5,14 +5,14 @@ $conn = $connector->DbConnector();
 
 $name = $_POST['name'];
 $filedesc = $_POST['desc'];
-
+$end_date = $_POST['end_date'];
 $input_name = basename($_FILES['uploaded_file']['name']);
 echo $input_name;
 if ($input_name == "") {
 	$id = $_POST['selector'];
 	$N = count($id);
 	for ($i = 0; $i < $N; $i++) {
-		mysqli_query($conn, "INSERT INTO assignment (fdesc,fdatein,teacher_id,class_id) VALUES ('$filedesc',NOW(),'$session_id','$id[$i]')") or die(mysqli_error($conn));
+		mysqli_query($conn, "INSERT INTO assignment (fdesc,fdatein,teacher_id,class_id, end_date) VALUES ('$filedesc',NOW(),'$session_id','$id[$i]', '$end_date')") or die(mysqli_error($conn));
 		mysqli_query($conn, "insert into notification (teacher_class_id,date_of_notification,link) value('$id[$i]',NOW(),'assignment_student.php')") or die(mysqli_error($conn));
 	}
 } else {
@@ -25,7 +25,7 @@ if ($input_name == "") {
 	$id = $_POST['selector'];
 	$N = count($id);
 	for ($i = 0; $i < $N; $i++) {
-		mysqli_query($conn, "INSERT INTO assignment (fdesc,floc,fdatein,teacher_id,fname,class_id) VALUES ('$filedesc','$newname',NOW(),'$session_id','$name','$id[$i]')") or die(mysqli_error($conn));
+		mysqli_query($conn, "INSERT INTO assignment (fdesc,floc,fdatein,teacher_id,fname,class_id, end_date) VALUES ('$filedesc','$newname',NOW(),'$session_id','$name','$id[$i]', '$end_date')") or die(mysqli_error($conn));
 		mysqli_query($conn, "insert into notification (teacher_class_id,notification,date_of_notification,link) value('$id[$i]','$name_notification',NOW(),'assignment_student.php')") or die(mysqli_error($conn));
 	}
 }

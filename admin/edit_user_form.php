@@ -80,6 +80,7 @@ $get_id = intval($_GET['id']);
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 
+
     // Update query
     if (!empty($password)) {
       $hashed_password = password_hash($password, PASSWORD_BCRYPT);

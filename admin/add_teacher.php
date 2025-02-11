@@ -59,6 +59,14 @@
             </div>
           </div>
 
+          <!-- <div class="control-group">
+            <label for="email">Email:</label>
+            <div class="controls">
+              <input class="form-control" type="email" name="email" id="email" type="text" placeholder="Enter Email"
+                required>
+            </div>
+          </div> -->
+
           <div class="control-group">
             <label for="firstname">Firstname:</label>
             <div class="controls">

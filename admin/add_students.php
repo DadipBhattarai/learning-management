@@ -7,6 +7,7 @@ if (isset($_POST['save'])) {
 	$id_number = $_POST['un'];
 	$first_name = $_POST['fn'];
 	$last_name = $_POST['ln'];
+	$email = $_POST['eml'];
 
 	// Check if the ID number already exists
 	$query = mysqli_query($conn, "SELECT * FROM students WHERE id_number = '$id_number'");
@@ -15,8 +16,8 @@ if (isset($_POST['save'])) {
 		echo 'ID_EXISTS';
 	} else {
 		// Insert student record into the database
-		$insert_query = mysqli_query($conn, "INSERT INTO students (class_id, id_number, first_name, last_name) 
-                                              VALUES ('$class_id', '$id_number', '$first_name', '$last_name')");
+		$insert_query = mysqli_query($conn, "INSERT INTO students (class_id, id_number, first_name, last_name, email) 
+                                              VALUES ('$class_id', '$id_number', '$first_name', '$last_name', '$email')");
 		if ($insert_query) {
 			echo 'Success';
 		} else {
@@ -58,7 +59,12 @@ if (isset($_POST['save'])) {
 							<input name="un" id="un" class="input focused" type="text" placeholder="ID Number" required>
 						</div>
 					</div>
-
+					<div class="control-group">
+						<label for="email">Email</label>
+						<div class="controls">
+							<input name="eml" id="eml" class="input focused" type="email" placeholder="Email" required>
+						</div>
+					</div>
 					<!-- First Name -->
 					<div class="control-group">
 						<label for="fn">First Name</label>
