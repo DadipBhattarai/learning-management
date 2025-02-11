@@ -82,7 +82,7 @@ if (!$conn) {
 									$.jGrowl("Class Already Exists", { header: 'Add Class Failed' });
 								} else {
 									$.jGrowl("Class Successfully Added", { header: 'Class Added' });
-									setTimeout(function () { window.location = 'dashboard_teacher.php'; }, 500);
+									setTimeout(function () { window.location = 'dasboard_teacher.php'; }, 500);
 								}
 							}
 						});
